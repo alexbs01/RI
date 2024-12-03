@@ -1,0 +1,24 @@
+// web indexer
+// mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index '...' -docs '...' [-create] [-numThreads int] [-h] [-p] [-titleTermVectors] [-bodyTermVectors] [-analyzer '...']"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -create"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/'"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -numThreads 1"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -h"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -p"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -analyzer 'english'"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -create -titleTermVectors"
+mvn compile exec:java -Dexec.mainClass="org.example.WebIndexer" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -docs 'src/main/resources/DOCS_PATH/' -create -bodyTermVectors"
+
+
+// top terms in doc
+// mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInDoc" -Dexec.args="-index '...' -field '...' -docID x [-top y] [-outfile '...']"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInDoc" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body' -docID 0"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInDoc" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body' -docID 0 -top 10"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInDoc" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body' -docID 0 -outfile 'src/main/resources/out.txt'"
+
+
+// top terms in field
+// mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInField" -Dexec.args="-index '...' -field '...' [-top y] [-outfile '...']"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInField" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body'"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInField" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body' -top 10"
+mvn compile exec:java -Dexec.mainClass="org.example.TopTermsInField" -Dexec.args="-index 'src/main/resources/INDEX_PATH/' -field 'body' -outfile 'src/main/resources/out.txt'"

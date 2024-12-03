@@ -1,0 +1,30 @@
+mvn compile exec:java -Dexec.mainClass="org.example.IndexTrecCovid" -Dexec.args=" -openmode CREATE -index 'INDEX/' -docs 'DOCS/' -indexingmodel 'bm25' 0.6"
+
+mvn compile exec:java -Dexec.mainClass="org.example.SearchEvalTrecCovid" -Dexec.args=" -search 'bm25' 0.6 -index 'INDEX/' -cut 4 -top 4 -queries 49"
+
+// ########### TRAINING_TEST_TREC_COVID ###########
+
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evaljm '1-10' '11-35' -cut 137 -metrica 'P' -index 'INDEX/'"
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evalbm25 '1-10' '11-35' -cut 137 -metrica 'P' -index 'INDEX/'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evaljm '1-20' '21-50' -cut 101 -metrica 'R' -index 'INDEX/'"
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evalbm25 '1-20' '21-50' -cut 101 -metrica 'R' -index 'INDEX/'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evaljm '1-20' '21-50' -cut 29 -metrica 'MRR' -index 'INDEX/'"
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evalbm25 '1-20' '21-50' -cut 29 -metrica 'MRR' -index 'INDEX/'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evaljm '1-20' '21-50' -cut 78 -metrica 'MAP' -index 'INDEX/'"
+mvn compile exec:java -Dexec.mainClass="org.example.TrainingTestTrecCovid" -Dexec.args=" -evalbm25 '1-20' '21-50' -cut 78 -metrica 'MAP' -index 'INDEX/'"
+
+// ################### COMPARE ###################
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test t 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-10.test.11-35.P@137.test.csv' 'DOCS/TREC-COVID.jm.training.1-10.test.11-35.P@137.test.csv'"
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test wilcoxon 0.2 -results 'DOCS/TREC-COVID.bm25.training.1-10.test.11-35.P@137.test.csv' 'DOCS/TREC-COVID.jm.training.1-10.test.11-35.P@137.test.csv'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test t 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.Recall@101.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.Recall@101.test.csv'"
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test wilcoxon 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.Recall@101.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.Recall@101.test.csv'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test t 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.MRR.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.MRR.test.csv'"
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test wilcoxon 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.MRR.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.MRR.test.csv'"
+
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test t 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.MAP@78.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.MAP@78.test.csv'"
+mvn compile exec:java -Dexec.mainClass="org.example.Compare" -Dexec.args=" -test wilcoxon 0.5 -results 'DOCS/TREC-COVID.bm25.training.1-20.test.21-50.MAP@78.test.csv' 'DOCS/TREC-COVID.jm.training.1-20.test.21-50.MAP@78.test.csv'"
